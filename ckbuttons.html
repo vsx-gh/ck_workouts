@@ -1,0 +1,164 @@
+<!doctype html>
+<head>
+    <title>Cardio Kickboxing Workout</title>
+<style>
+#moves_target {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+#core_target {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data).cloneNode(true));
+}
+
+function drop_no_copy(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  var el = document.getElementById(data);
+  el.parentNode.removeChild(el);
+  //var data = ""
+  //ev.target.appendChild(document.getElementById(data));
+}
+
+function addRound() {
+  var x = document.getElementById("moves_target");
+  var buttonz = x.getElementsByTagName("BUTTON");
+  var round_value = ""
+  for (i = 0; i < buttonz.length; i++) {
+    var btnval = buttonz[i].value
+    if (round_value.length > 0) {
+      round_value += "-" + btnval;
+    }
+    else {
+      round_value += btnval;
+    }
+  }
+    var tableRef = document.getElementById("moves_table").getElementsByTagName('tbody')[0];
+
+    // Insert a row in the table at the last row
+    var newRow   = tableRef.insertRow();
+
+    // Insert a cell in the row at index 0
+    var newCell  = newRow.insertCell(0);
+
+    // Append a text node to the cell
+    var newText  = document.createTextNode(round_value);
+    newCell.appendChild(newText);
+
+    // Insert a new cell in the row for core move at index 1
+    var newCoreCell = newRow.insertCell(1);
+
+    // Append a text node to the cell
+    var newCoreText = document.createTextNode(window.currCoreMove);
+    newCoreCell.appendChild(newCoreText);
+
+    // Append a delete button for the row
+    var newDelete = newRow.insertCell(2);
+    newDelete.innerHTML = '<button value="x" onclick="deleteRow(this)">x</button>';
+
+    // Clear div for next move construction
+    clearBox('moves_target');
+}
+
+function clearBox(elementID)
+{
+    document.getElementById(elementID).innerHTML = "";
+}
+
+function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("moves_table").deleteRow(i);
+}
+
+function getCore(coreMove) {
+  window.currCoreMove = coreMove.value;
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<p>Drag moves into the rectangle:</p>
+<div id="moves_target" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<div id="moves_src" ondrop="drop_no_copy(event)" ondragover="allowDrop(event)">
+<button class="button" id="jab" draggable="true" ondragstart="drag(event)" value="Jab">Jab</button>
+<button class="button" id="cross" draggable="true" ondragstart="drag(event)" value="Cross">Cross</button>
+<button class="button" id="backhand" draggable="true" ondragstart="drag(event)" value="Backhand">Backhand</button>
+<button class="button" id="lead_hook" draggable="true" ondragstart="drag(event)" value="Lead Hook">Lead Hook</button>
+<button class="button" id="rear_hook" draggable="true" ondragstart="drag(event)" value="Rear Hook">Rear Hook</button>
+<button class="button" id="uppercut" draggable="true" ondragstart="drag(event)" value="Uppercut">Uppercut</button>
+<button class="button" id="front_kick" draggable="true" ondragstart="drag(event)" value="Front Kick">Front Kick</button>
+<button class="button" id="back_kick" draggable="true" ondragstart="drag(event)" value="Back Kick">Back Kick</button>
+<button class="button" id="turning_kick" draggable="true" ondragstart="drag(event)" value="Turning Kick">Turning Kick</button>
+</div>
+<br />
+<div id="core_src" ondrop="drop_no_copy(event)" ondragover="allowDrop(event)">
+<br />
+<input type="button" class="button" id="wall_sit" value="Wall Sit" onclick="getCore(this)"></input>
+<input type="button" class="button" id="flutter_kicks" draggable="true" ondragstart="drag(event)" value="Flutter Kicks" onclick="getCore(this)"></input>
+<input type="button" class="button" id="russian_twists" draggable="true" ondragstart="drag(event)" value="Russian Twists" onclick="getCore(this)"></input>
+<input type="button" class="button" id="jumping_jacks" draggable="true" ondragstart="drag(event)" value="Jumping Jacks" onclick="getCore(this)"></input>
+<input type="button" class="button" id="boat_pose" draggable="true" ondragstart="drag(event)" value="Boat Pose" onclick="getCore(this)"></input>
+<input type="button" class="button" id="plank" draggable="true" ondragstart="drag(event)" value="Plank" onclick="getCore(this)"></input>
+<input type="button" class="button" id="reverse_plank" draggable="true" ondragstart="drag(event)" value="Reverse Plank" onclick="getCore(this)"></input>
+<input type="button" class="button" id="divebomb_pushup" draggable="true" ondragstart="drag(event)" value="Divebomb Push-Ups" onclick="getCore(this)"></input>
+<input type="button" class="button" id="crunches" draggable="true" ondragstart="drag(event)" value="Crunches" onclick="getCore(this)"></input>
+<input type="button" class="button" id="jump_rope" draggable="true" ondragstart="drag(event)" value="Jump Rope" onclick="getCore(this)"></input>
+<input type="button" class="button" id="bicycle_crunches" draggable="true" ondragstart="drag(event)" value="Bicycle Crunches" onclick="getCore(this)"></input>
+</div>
+
+<button onclick="addRound()">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" value="Reset" onclick="clearBox('moves_target')">Reset</button>
+
+<br /><br />
+<main role="main" class="container">
+   <table class="table table-striped table-hover" id="moves_table">
+      <thead class="thead-dark">
+          <tr>
+              <th>Moves</th>
+              <th>Core</th>
+          </tr>
+      </thead>
+      <tbody>
+      </tbody>
+  </table>
+
+  </main><!-- /.container -->
+
+<script type="text/javascript">
+  $('tbody').sortable();
+</script>
+</body>
+</html>
