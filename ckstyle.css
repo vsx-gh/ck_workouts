@@ -1,0 +1,104 @@
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-align: center;
+}
+.button {
+  background-color: #2196F3; /* Blue */
+  border: none;
+  color: white;
+  /*padding: 20px;*/
+  text-align: center;
+  text-decoration: none;
+  width: 150px;
+  height: 50px;
+  border-radius: 8px;
+}
+.holder {
+  width: 500px;
+  height: 500px;
+}
+.dropzone {
+  background-color: #fff;
+  border: dashed 4px;
+  border-color: #aaa;
+  height: 200px;
+  width: 750px;
+}
+.draggable {
+  width: 250px;
+  height: 75px;
+  font-size: 20px;
+  background-color: #2196F3; /* Blue */
+  color: white;
+  margin: 0 auto;
+  border-radius: 8px;
+  outline: none;
+  touch-action: none;
+}
+.action_button {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #fff; /* Blue */
+  color: black;
+  margin: 0 auto;
+  border-radius: 8px;
+  outline: none;
+}
+.drop-active {
+  border-color: #000;
+}
+.drop-target {
+  background-color: #fff;
+  border-color: #aaa;
+  border-style: dashed;
+}
+.draggable.can-drop {
+  color: white;
+  background-color: #4CAF50; /* Green */
+}
+.tap-target {
+  background-color: #2196F3; /* Blue */
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  width: 250px;
+  height: 75px;
+  font-size: 20px;
+  margin: 0 auto;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: none;
+  transition: all 0.3s;
+  outline: none;
+}
+.tap-target.switch-bg {
+  background-color: #4CAF50; /* Green */
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  touch-action: none;
+  font-size: 30px;
+}
+.th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.td {
+  /*padding: 8px;*/
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  touch-action: none;
+}
+.tr:hover {
+  background-color:#f5f5f5;
+  touch-action: none;
+}

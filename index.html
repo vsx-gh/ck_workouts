@@ -1,0 +1,77 @@
+<!doctype html>
+<head>
+    <title>Cardio Kickboxing Workout</title>
+<link href="ckstyle.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+<script src="ckscripts.js"> </script>
+</head>
+
+<body>
+<h1> Cardio Kickboxing Workout Builder</h1>
+<p>Drag kicks/punches into the rectangle:</p>
+<div id="holder" align="center">
+<div id="moves_src">
+<button class="draggable" id="jab" value="Jab">Jab</button>
+<button class="draggable" id="cross" value="Cross">Cross</button>
+<button class="draggable" id="backhand" value="Backhand">Backhand</button>
+<br>
+<button class="draggable" id="lead_hook" value="Lead Hook">Lead Hook</button>
+<button class="draggable" id="rear_hook" value="Rear Hook">Rear Hook</button>
+<button class="draggable" id="uppercut" value="Uppercut">Uppercut</button>
+<br>
+<button class="draggable" id="elbow" value="Elbow">Elbow</button>
+<button class="draggable" id="front_kick" value="Front Kick">Front Kick</button>
+<button class="draggable" id="back_kick" value="Back Kick">Back Kick</button>
+<br>
+<button class="draggable" id="turning_kick" value="Turning Kick">Turning Kick</button>
+<button class="draggable" id="knee" value="Knee">Knee</button>
+</div>
+<br>
+<div class="dropzone" id="moves_target"></div>
+
+<br>
+<p>Select a core move for this round:</p>
+<div id="core_src">
+<button class="tap-target" id="wall_sit" value="Wall Sit" onclick="getCore(this)">Wall Sit</button>
+<button class="tap-target" id="flutter_kicks" value="Flutter Kicks" onclick="getCore(this)">Flutter Kicks</button>
+<button class="tap-target" id="russian_twists" value="Russian Twists" onclick="getCore(this)">Russian Twists</button>
+<br>
+<button class="tap-target" id="jumping_jacks" value="Jumping Jacks" onclick="getCore(this)">Jumping Jacks</button>
+<button class="tap-target" id="boat_pose" value="Boat Pose" onclick="getCore(this)">Boat Pose</button>
+<button class="tap-target" id="plank" value="Plank" onclick="getCore(this)">Plank</button>
+<br>
+<button class="tap-target" id="reverse_plank" value="Reverse Plank" onclick="getCore(this)">Reverse Plank</button>
+<button class="tap-target" id="divebomb_pushup" value="Divebomb Pushup" onclick="getCore(this)">Divebomb Pushup</button>
+<button class="tap-target" id="crunches" value="Crunches" onclick="getCore(this)">Crunches</button>
+<br>
+<button class="tap-target" id="jump_rope" value="Jump Rope" onclick="getCore(this)">Jump Rope</button>
+<button class="tap-target" id="bicycle_crunches" value="Bicycle Crunches" onclick="getCore(this)">Bicycle Crunches</button>
+</div>
+<br>
+<button class="action_button" onclick="addRound()">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="action_button" type="reset" value="Reset" onclick="clearBox('moves_target')">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="action_button" onClick="printDiv()">Print</button>
+
+<br><br>
+<div id="my_workout">
+<main role="main" class="container">
+   <table class="table" id="moves_table">
+      <thead class="thead-dark">
+          <tr>
+              <th align="center">Moves</th>
+              <th align="center">Core</th>
+          </tr>
+      </thead>
+      <tbody>
+      </tbody>
+  </table>
+
+  </main><!-- /.container -->
+
+<script type="text/javascript">
+  $('tbody').sortable();
+</script>
+</div></div>
+</body>
+</html>
