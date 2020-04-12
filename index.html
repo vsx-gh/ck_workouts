@@ -5,73 +5,149 @@
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 <script src="ckscripts.js"> </script>
 </head>
 
 <body>
+<!-- Header text -->
 <h1> Cardio Kickboxing Workout Builder</h1>
-<p>Drag kicks/punches into the rectangle:</p>
 <div id="holder" align="center">
+<label for="workout_name">Workout name:</label>
+<input type="text" class="workout_name" id="workout_name" name="workout_name"></input>
+
+<!-- Punch/kick moves -->
+<p>Drag kicks/punches into the rectangle:</p>
 <div id="moves_src">
 <button class="draggable" id="jab" value="Jab">Jab</button>
 <button class="draggable" id="cross" value="Cross">Cross</button>
 <button class="draggable" id="backhand" value="Backhand">Backhand</button>
+<button class="draggable" id="lead_hook" value="Hook">Hook</button>
 <br>
-<button class="draggable" id="lead_hook" value="Lead Hook">Lead Hook</button>
-<button class="draggable" id="rear_hook" value="Rear Hook">Rear Hook</button>
 <button class="draggable" id="uppercut" value="Uppercut">Uppercut</button>
-<br>
 <button class="draggable" id="elbow" value="Elbow">Elbow</button>
-<button class="draggable" id="front_kick" value="Front Kick">Front Kick</button>
-<button class="draggable" id="back_kick" value="Back Kick">Back Kick</button>
+<button class="draggable" id="power_hooks" value="Power Hooks">Power Hooks</button>
+<button class="draggable" id="speed_jabs" value="Speed Jabs">Speed Jabs</button>
 <br>
+<button class="draggable" id="slip" value="Slip">Slip</button>
+<button class="draggable" id="squat" value="Squat">Squat</button>
+<button class="draggable" id="rest" value="Rest">Rest</button>
+<button class="draggable" id="front_kick" value="Front Kick">Front Kick</button>
+<br>
+<button class="draggable" id="front_kick" value="Side Kick">Side Kick</button>
+<button class="draggable" id="back_kick" value="Back Kick">Back Kick</button>
 <button class="draggable" id="turning_kick" value="Turning Kick">Turning Kick</button>
 <button class="draggable" id="knee" value="Knee">Knee</button>
+<br>
 </div>
+
 <br>
 <div class="dropzone" id="moves_target"></div>
 
+<!-- Core workout -->
 <br>
 <p>Select a core move for this round:</p>
-<div id="core_src">
-<button class="tap-target" id="wall_sit" value="Wall Sit" onclick="getCore(this)">Wall Sit</button>
-<button class="tap-target" id="flutter_kicks" value="Flutter Kicks" onclick="getCore(this)">Flutter Kicks</button>
-<button class="tap-target" id="russian_twists" value="Russian Twists" onclick="getCore(this)">Russian Twists</button>
-<br>
-<button class="tap-target" id="jumping_jacks" value="Jumping Jacks" onclick="getCore(this)">Jumping Jacks</button>
-<button class="tap-target" id="boat_pose" value="Boat Pose" onclick="getCore(this)">Boat Pose</button>
-<button class="tap-target" id="plank" value="Plank" onclick="getCore(this)">Plank</button>
-<br>
-<button class="tap-target" id="reverse_plank" value="Reverse Plank" onclick="getCore(this)">Reverse Plank</button>
-<button class="tap-target" id="divebomb_pushup" value="Divebomb Pushup" onclick="getCore(this)">Divebomb Pushup</button>
-<button class="tap-target" id="crunches" value="Crunches" onclick="getCore(this)">Crunches</button>
-<br>
-<button class="tap-target" id="jump_rope" value="Jump Rope" onclick="getCore(this)">Jump Rope</button>
-<button class="tap-target" id="bicycle_crunches" value="Bicycle Crunches" onclick="getCore(this)">Bicycle Crunches</button>
+<div class="tab">
+  <button id="defaultOpen" class="tablinks" align="center" onclick="openCore(event, 'plank_src')">Plank-y</button>
+  <button class="tablinks" align="center" onclick="openCore(event, 'belly_src')">Belly</button>
+  <button class="tablinks" align="center" onclick="openCore(event, 'lower_src')">Lower Body</button>
+  <button class="tablinks" align="center" onclick="openCore(event, 'upper_src')">Upper Body</button>
+  <button class="tablinks" align="center" onclick="openCore(event, 'misc_src')">Misc</button>
 </div>
-<br>
-<button class="action_button" onclick="addRound()">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="action_button" type="reset" value="Reset" onclick="clearBox('moves_target')">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="action_button" onClick="printDiv()">Print</button>
 
+<div id="plank_src" class="tabcontent">
+<button class="tap-target" id="plank" value="Plank" onclick="getCore(this)">Plank</button>
+<button class="tap-target" id="reverse_plank" value="Reverse Plank" onclick="getCore(this)">Reverse Plank</button>
+<button class="tap-target" id="side_plank" value="Side Plank" onclick="getCore(this)">Side Plank</button>
+<button class="tap-target" id="plank_walk_out" value="Plank Walk-Out" onclick="getCore(this)">Plank Walk-Out</button>
+<button class="tap-target" id="side_plank_tap" value="Side Plank Tap" onclick="getCore(this)">Side Plank Tap</button>
+<button class="tap-target" id="plank_shoulder_tap" value="Plank Shoulder Tap" onclick="getCore(this)">Plk Shoulder Tap</button>
+<button class="tap-target" id="star_plank" value="Star Plank" onclick="getCore(this)">Star Plank</button>
+<button class="tap-target" id="knee_elbow_plank" value="Knee-Elbow Plank" onclick="getCore(this)">Knee-Elbow Plank</button>
+</div>
+
+<div id="belly_src" class="tabcontent">
+<button class="tap-target" id="crunch" value="Crunch" onclick="getCore(this)">Crunch</button>
+<button class="tap-target" id="bicycle_crunch" value="Bicycle Crunch" onclick="getCore(this)">Bicycle Crunch</button>
+<button class="tap-target" id="boat_pose" value="Boat Pose" onclick="getCore(this)">Boat Pose</button>
+<button class="tap-target" id="russian_twist" value="Russian Twist" onclick="getCore(this)">Russian Twist</button>
+<button class="tap-target" id="dead_bug" value="Dead Bug" onclick="getCore(this)">Dead Bug</button>
+<button class="tap-target" id="situp_w_reach" value="Situp w/Reach" onclick="getCore(this)">Situp w/Reach</button>
+<button class="tap-target" id="crunch_kick" value="Crunch Kick" onclick="getCore(this)">Crunch Kick</button>
+<button class="tap-target" id="boat_pose_scissor" value="Boat Pose Scissor" onclick="getCore(this)">Boat Pose Scissor</button>
+<button class="tap-target" id="reverse_crunch" value="Reverse Crunch" onclick="getCore(this)">Reverse Crunch</button>
+<button class="tap-target" id="situp" value="Situp" onclick="getCore(this)">Situp</button>
+<button class="tap-target" id="hundreds" value="Hundreds" onclick="getCore(this)">Hundreds</button>
+<button class="tap-target" id="over_the_mountain" value="Over the Mountain" onclick="getCore(this)">Over the Mountain</button>
+<button class="tap-target" id="v_up" value="V-Up" onclick="getCore(this)">V-Up</button>
+<button class="tap-target" id="superman" value="Superman" onclick="getCore(this)">Superman</button>
+</div>
+
+<div id="lower_src" class="tabcontent">
+<button class="tap-target" id="wall_sit" value="Wall Sit" onclick="getCore(this)">Wall Sit</button>
+<button class="tap-target" id="side_leg_raise" value="Side Leg Raise" onclick="getCore(this)">Side Leg Raise</button>
+<button class="tap-target" id="raised_leg_circle" value="Raised Leg Circle" onclick="getCore(this)">Raised Leg Circle</button>
+<button class="tap-target" id="high_knee" value="High Knee" onclick="getCore(this)">High Knee</button>
+<button class="tap-target" id="mountain_climber" value="Mountain Climber" onclick="getCore(this)">Mountain Climber</button>
+<button class="tap-target" id="alt_arm_leg_raise" value="Alt Arm/Leg Raise" onclick="getCore(this)">Alt Arm/Leg Raise</button>
+<button class="tap-target" id="bridge_thrust" value="Bridge Thrust" onclick="getCore(this)">Bridge Thrust</button>
+<button class="tap-target" id="flutter_kick" value="Flutter Kick" onclick="getCore(this)">Flutter Kicks</button>
+<button class="tap-target" id="knee_to_elbow" value="Knee-to-Elbow" onclick="getCore(this)">Knee-to-Elbow</button>
+<button class="tap-target" id="windshield_wiper" value="Windshield Wiper" onclick="getCore(this)">Windshield Wiper</button>
+<button class="tap-target" id="heel_tap" value="Heel Tap" onclick="getCore(this)">Heel Tap</button>
+<button class="tap-target" id="side_jack_knife" value="Side Jack-Knife" onclick="getCore(this)">Side Jack-Knife</button>
+<button class="tap-target" id="donkey_kick" value="Donkey_Kick" onclick="getCore(this)">Donkey Kick</button>
+<button class="tap-target" id="fire_hydrant" value="Fire Hydrant" onclick="getCore(this)">Fire Hydrant</button>
+<button class="tap-target" id="one_leg_bridge_thrust" value="One-Leg Bridge Thrust" onclick="getCore(this)">1-Leg Brdg Thrust</button>
+<button class="tap-target" id="squat_jump" value="Squat Jump" onclick="getCore(this)">Squat Jump</button>
+<button class="tap-target" id="wide_squat_twist" value="Wide Squat Twist" onclick="getCore(this)">Wide Squat Twist</button>
+<button class="tap-target" id="alt_lunge" value="Alt Lunge" onclick="getCore(this)">Alt Lunge</button>
+<button class="tap-target" id="alt_lateral_lunge" value="Alt Lateral Lunge" onclick="getCore(this)">Alt Lateral Lunge</button>
+</div>
+
+<div id="upper_src" class="tabcontent">
+<button class="tap-target" id="divebomb_pushup" value="Divebomb Pushup" onclick="getCore(this)">Dive Pushup</button>
+<button class="tap-target" id="downward_dog" value="Downward Dog" onclick="getCore(this)">Downward Dog</button>
+<button class="tap-target" id="downward_dog_pushup" value="Downward Dog Pushup" onclick="getCore(this)">Down Dog Push</button>
+<button class="tap-target" id="burpee" value="Burpee" onclick="getCore(this)">Burpee</button>
+<button class="tap-target" id="sitting_punch" value="Sitting Punch" onclick="getCore(this)">Sitting Punch</button>
+</div>
+
+<div id="misc_src" class="tabcontent">
+<button class="tap-target" id="jumping_jack" value="Jumping Jack" onclick="getCore(this)">Jumping Jack</button>
+<button class="tap-target" id="jump_rope" value="Jump Rope" onclick="getCore(this)">Jump Rope</button>
+<button class="tap-target" id="rest" value="Rest" onclick="getCore(this)">Rest</button>
+</div>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+<!-- Action buttons-->
+<br>
+<button class="action_button" onclick="addRound()">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button class="action_button" type="reset" value="Reset" onclick="clearBox('moves_target')">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button class="action_button" onClick="printDiv()">View/Print</button>
+
+<!-- Table holding current workout-->
 <br><br>
 <div id="my_workout">
 <main role="main" class="container">
    <table class="table" id="moves_table">
       <thead class="thead-dark">
           <tr>
-              <th align="center">Moves</th>
-              <th align="center">Core</th>
+              <th class="th"">Moves</th>
+              <th class="th">Core</th>
           </tr>
       </thead>
       <tbody>
       </tbody>
   </table>
-
   </main><!-- /.container -->
 
 <script type="text/javascript">
   $('tbody').sortable();
 </script>
-</div></div>
+
 </body>
 </html>

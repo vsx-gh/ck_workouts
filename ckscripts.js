@@ -6,8 +6,7 @@ function printDiv() {
   a.document.write(divContents);
   a.document.write('</body></html>');
   a.document.close();
-  a.print();
-}
+} // function printDiv()
 
 function addRound() {
   var x = document.getElementById("moves_target");
@@ -18,6 +17,8 @@ function addRound() {
     alert('Please select at least one kickboxing move and one core move.');
     return false;
   }
+
+  // Assemble punch/kick moves
   var round_value = ""
   for (i = 0; i < buttonz.length; i++) {
     var btnval = buttonz[i].value
@@ -28,33 +29,43 @@ function addRound() {
       round_value += btnval;
     }
   }
-    var tableRef = document.getElementById("moves_table").getElementsByTagName('tbody')[0];
 
-    // Insert a row in the table at the last row
-    var newRow   = tableRef.insertRow();
-    newRow.className = "tr"
+  var tableRef = document.getElementById("moves_table").getElementsByTagName('tbody')[0];
 
-    // Insert a cell in the row at index 0
-    var newCell  = newRow.insertCell(0);
+  // Insert a row in the table at the last row
+  var newRow   = tableRef.insertRow();
+  newRow.className = "tr"
 
-    // Append a text node to the cell
-    var newText  = document.createTextNode(round_value);
-    newCell.appendChild(newText);
+  // Insert a cell in the row at index 0
+  var newCell  = newRow.insertCell(0);
+  newCell.className = "td"
 
-    // Insert a new cell in the row for core move at index 1
-    var newCoreCell = newRow.insertCell(1);
+  // Append a text node to the cell
+  var newText  = document.createTextNode(round_value);
+  newCell.appendChild(newText);
 
-    // Append a text node to the cell
-    var newCoreText = document.createTextNode(window.currCoreMove);
-    newCoreCell.appendChild(newCoreText);
+  // Insert a new cell in the row for core move at index 1
+  var newCoreCell = newRow.insertCell(1);
+  newCoreCell.className = "td"
 
-    // Append a delete button for the row
-    var newDelete = newRow.insertCell(2);
-    newDelete.innerHTML = '<button value="x" onclick="deleteRow(this)">x</button>';
+  // Append a text node to the cell
+  var newCoreText = document.createTextNode(window.currCoreMove);
+  newCoreCell.appendChild(newCoreText);
 
-    // Clear div for next move construction
-    clearBox('moves_target');
-}
+  // Append a delete button for the row
+  var newDelete = newRow.insertCell(2);
+  newDelete.innerHTML = '<button value="x" onclick="deleteRow(this)">x</button>';
+
+  // Add user-defined workout name as table label
+  var ck_name = document.getElementById("workout_name").value;
+  var ck_label = document.createTextNode(ck_name);
+  table_cap = document.getElementById("moves_table").createCaption();
+  table_cap.textContent = ck_label.nodeValue;
+  
+
+  // Clear div for next round construction
+  clearBox('moves_target');
+} // function addRound()
 
 function clearCore() {
   currCoreSelected = document.getElementById(window.currCoreId)
@@ -62,23 +73,41 @@ function clearCore() {
     currCoreSelected.classList.remove('switch-bg');
     event.preventDefault();
   }
-}
+} // function clearCore()
 
 function clearBox(elementID)
 {
     document.getElementById(elementID).innerHTML = "";
     clearCore();
-}
+    window.currCoreMove = null;
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+} // function clearBox()
 
 function deleteRow(r) {
   var i = r.parentNode.parentNode.rowIndex;
   document.getElementById("moves_table").deleteRow(i);
-}
+} // function deleteRow()
 
 function getCore(coreMove) {
   window.currCoreMove = coreMove.value;
   window.currCoreId = coreMove.id;
-}
+} // function getCore()j
+
+function openCore(evt, coreName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(coreName).style.display = "block";
+  evt.currentTarget.className += " active";
+} // function openCore()
+
 interact('.draggable')
   .draggable({
     // enable inertial throwing
@@ -118,7 +147,7 @@ interact('.draggable')
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-  }
+  } // function dragMoveListener()
 
   // enable draggables to be dropped into this
   interact('.dropzone').dropzone({
